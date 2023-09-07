@@ -3,14 +3,40 @@
   import InputEditor from './components/InputEditor.svelte'
   import OutputEditor from './components/OutputEditor.svelte'
   import ConfigEditor from './components/ConfigEditor.svelte'
+  import { retrieve, share } from './sharing'
+  import { onMount } from 'svelte'
 
   const monaco = import('monaco-editor')
 
-  let inputCode = '.container>button{outline:none}'
-  let config = JSON.stringify({ printWidth: 80 }, null, 2)
+  const STORAGE_KEY_CODE = 'malva.v1.code'
+  const STORAGE_KEY_CONFIG = 'malva.v1.config'
+
+  let inputCode = ''
+  let configJSON = ''
+
+  $: {
+    localStorage.setItem(STORAGE_KEY_CODE, inputCode)
+    localStorage.setItem(STORAGE_KEY_CONFIG, configJSON)
+  }
+
+  onMount(() => {
+    const shared = retrieve()
+    inputCode =
+      shared.inputCode ||
+      localStorage.getItem(STORAGE_KEY_CODE) ||
+      '.container>button{outline:none}'
+    configJSON =
+      shared.config ||
+      localStorage.getItem(STORAGE_KEY_CONFIG) ||
+      JSON.stringify({ printWidth: 80 }, null, 2)
+  })
+
+  function handleShare() {
+    share({ inputCode, config: configJSON })
+  }
 </script>
 
-<Header />
+<Header on:share={handleShare} />
 {#await monaco}
   <main class="flex justify-center items-center">Loading editor...</main>
 {:then monaco}
@@ -22,8 +48,8 @@
       <div class="h-30%">
         <ConfigEditor
           {monaco}
-          value={config}
-          on:input={(event) => (config = event.detail)}
+          value={configJSON}
+          on:input={(event) => (configJSON = event.detail)}
         />
       </div>
     </div>

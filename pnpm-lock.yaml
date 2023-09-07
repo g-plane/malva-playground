@@ -8,9 +8,15 @@ dependencies:
   '@unocss/reset':
     specifier: ^0.55.7
     version: 0.55.7
+  js-base64:
+    specifier: ^3.7.5
+    version: 3.7.5
   monaco-editor:
     specifier: ^0.41.0
     version: 0.41.0
+  pako:
+    specifier: ^2.1.0
+    version: 2.1.0
 
 devDependencies:
   '@gplane/tsconfig':
@@ -19,6 +25,9 @@ devDependencies:
   '@sveltejs/vite-plugin-svelte':
     specifier: ^2.4.5
     version: 2.4.5(svelte@4.2.0)(vite@4.4.9)
+  '@types/pako':
+    specifier: ^2.0.0
+    version: 2.0.0
   prettier:
     specifier: ^3.0.3
     version: 3.0.3
@@ -388,6 +397,10 @@ packages:
 
   /@types/estree@1.0.1:
     resolution: {integrity: sha512-LG4opVs2ANWZ1TJoKc937iMmNstM/d0ae1vNbnBvBhqCSezgVUOzcLCqbI5elV8Vy6WKwKjaqR+zO9VKirBBCA==}
+    dev: true
+
+  /@types/pako@2.0.0:
+    resolution: {integrity: sha512-10+iaz93qR5WYxTo+PMifD5TSxiOtdRaxBf7INGGXMQgTCu8Z/7GYWYFUOS3q/G0nE5boj1r4FEB+WSy7s5gbA==}
     dev: true
 
   /@types/pug@2.0.6:
@@ -949,6 +962,10 @@ packages:
     hasBin: true
     dev: true
 
+  /js-base64@3.7.5:
+    resolution: {integrity: sha512-3MEt5DTINKqfScXKfJFrRbxkrnk2AxPWGBL/ycjz4dK8iqiSJ06UxD8jh8xuh6p10TX4t2+7FsBYVxxQbMg+qA==}
+    dev: false
+
   /jsonc-parser@3.2.0:
     resolution: {integrity: sha512-gfFQZrcTc8CnKXp6Y4/CBT3fTc0OVuDofpre4aEeEpSBPV5X5v4+Vmx+8snU7RLPrNHPKSgLxGo9YuQzz20o+w==}
     dev: true
@@ -1123,6 +1140,10 @@ packages:
     dependencies:
       p-limit: 3.1.0
     dev: true
+
+  /pako@2.1.0:
+    resolution: {integrity: sha512-w+eufiZ1WuJYgPXbV/PO3NCMEc3xqylkKHzp8bxp1uW4qaSNQUkwmLLEc3kKsfz8lpV1F8Ht3U1Cm+9Srog2ug==}
+    dev: false
 
   /parent-module@1.0.1:
     resolution: {integrity: sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==}
