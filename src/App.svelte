@@ -56,3 +56,9 @@
     <OutputEditor {monaco} value={inputCode} />
   </main>
 {/await}
+
+<style>
+  main {
+    min-height: calc(100vh - 57px);
+  }
+</style>
