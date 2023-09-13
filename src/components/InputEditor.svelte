@@ -12,6 +12,7 @@
   onMount(() => {
     editor = monaco.editor.create(el, {
       ...sharedOptions,
+      renderWhitespace: 'boundary',
       value,
       language: 'css',
     })
