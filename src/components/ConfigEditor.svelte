@@ -1,6 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher, onDestroy, onMount } from 'svelte'
   import { sharedOptions } from '../shared-monaco-options'
+  import { configSchema } from '../malva'
 
   export let value: string
   export let monaco: typeof import('monaco-editor')
@@ -17,6 +18,16 @@
     })
     editor.onDidChangeModelContent(() => {
       dispatch('input', editor.getValue())
+    })
+
+    monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
+      schemas: [
+        {
+          uri: 'http://server/malva-schema.json',
+          fileMatch: [editor.getModel()?.uri.toString() ?? ''],
+          schema: configSchema,
+        },
+      ],
     })
   })
 

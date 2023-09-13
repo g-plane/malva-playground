@@ -20,6 +20,7 @@
   "devDependencies": {
     "@gplane/tsconfig": "^6.1.0",
     "@sveltejs/vite-plugin-svelte": "^2.4.5",
+    "@types/json-schema": "^7.0.12",
     "@types/pako": "^2.0.0",
     "prettier": "^3.0.3",
     "svelte": "^4.2.0",
