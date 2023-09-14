@@ -43,7 +43,11 @@
   <main class="grid grid-cols-2 h-full">
     <div>
       <div class="h-70%">
-        <InputEditor {monaco} value={inputCode} />
+        <InputEditor
+          {monaco}
+          value={inputCode}
+          on:input={(event) => (inputCode = event.detail)}
+        />
       </div>
       <div class="h-30%">
         <ConfigEditor

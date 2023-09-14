@@ -7,6 +7,10 @@
   let el: HTMLDivElement
   let editor: import('monaco-editor').editor.IStandaloneCodeEditor
 
+  $: {
+    editor?.setValue(value)
+  }
+
   onMount(() => {
     editor = monaco.editor.create(el, {
       ...sharedOptions,
