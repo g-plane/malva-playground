@@ -5,8 +5,10 @@
   import ConfigEditor from './components/ConfigEditor.svelte'
   import { encodeString, retrieve, share } from './sharing'
   import { onMount } from 'svelte'
+  import { loadWasm, type Formatter } from './malva'
 
   const monaco = import('monaco-editor')
+  let format: Formatter = () => '/* Loading Malva... */'
 
   const STORAGE_KEY_CODE = 'malva.v1.code'
   const STORAGE_KEY_CONFIG = 'malva.v1.config'
@@ -14,13 +16,22 @@
   let inputCode = ''
   let configJSON = ''
   const syntax = 'css'
+  let outputCode = ''
 
   $: {
     localStorage.setItem(STORAGE_KEY_CODE, inputCode)
     localStorage.setItem(STORAGE_KEY_CONFIG, configJSON)
   }
 
-  onMount(() => {
+  $: {
+    try {
+      outputCode = format(inputCode, syntax, JSON.parse(configJSON))
+    } catch (error) {
+      outputCode = `/* ${error} */`
+    }
+  }
+
+  onMount(async () => {
     const shared = retrieve()
     inputCode =
       shared.inputCode ||
@@ -30,6 +41,8 @@
       shared.config ||
       localStorage.getItem(STORAGE_KEY_CONFIG) ||
       JSON.stringify({ printWidth: 80 }, null, 2)
+
+    format = await loadWasm('https://malva.netlify.app/wasm.js')
   })
 
   function handleShare() {
@@ -65,7 +78,7 @@
         />
       </div>
     </div>
-    <OutputEditor {monaco} value={inputCode} />
+    <OutputEditor {monaco} value={outputCode} />
   </main>
 {/await}
 
