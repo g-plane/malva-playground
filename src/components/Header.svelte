@@ -6,6 +6,10 @@
   function handleShareButtonClick() {
     dispatch('share')
   }
+
+  function handleViewASTButtonClick() {
+    dispatch('view-ast')
+  }
 </script>
 
 <header
@@ -26,6 +30,12 @@
         on:click={handleShareButtonClick}
       >
         <i class="fa-solid fa-share mr-1" />Share
+      </button>
+      <button
+        class="btn-options border-fuchsia-600 border-width-1px rounded-sm px-2 py-1 hover:bg-fuchsia-100 active:bg-fuchsia-200 focus:bg-fuchsia-200 relative"
+        on:click={handleViewASTButtonClick}
+      >
+        <i class="fa-solid fa-bug mr-1" />View AST
       </button>
     </div>
 

@@ -3,7 +3,7 @@
   import InputEditor from './components/InputEditor.svelte'
   import OutputEditor from './components/OutputEditor.svelte'
   import ConfigEditor from './components/ConfigEditor.svelte'
-  import { retrieve, share } from './sharing'
+  import { encodeString, retrieve, share } from './sharing'
   import { onMount } from 'svelte'
 
   const monaco = import('monaco-editor')
@@ -13,6 +13,7 @@
 
   let inputCode = ''
   let configJSON = ''
+  const syntax = 'css'
 
   $: {
     localStorage.setItem(STORAGE_KEY_CODE, inputCode)
@@ -34,9 +35,16 @@
   function handleShare() {
     share({ inputCode, config: configJSON })
   }
+
+  function handleViewAST() {
+    const url = new URL('https://raffia-play.vercel.app/')
+    url.searchParams.set('code', encodeString(inputCode))
+    url.searchParams.set('syntax', syntax)
+    window.open(url, '_blank', 'noopener noreferrer')
+  }
 </script>
 
-<Header on:share={handleShare} />
+<Header on:share={handleShare} on:view-ast={handleViewAST} />
 {#await monaco}
   <main class="flex justify-center items-center">Loading editor...</main>
 {:then monaco}

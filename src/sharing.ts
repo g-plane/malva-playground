@@ -8,8 +8,8 @@ export type ShareableData = {
 
 export function share({ inputCode, config }: ShareableData) {
   const url = new URL(location.href)
-  url.searchParams.set('code', Base64.fromUint8Array(gzip(inputCode)))
-  url.searchParams.set('config', Base64.fromUint8Array(gzip(config)))
+  url.searchParams.set('code', encodeString(inputCode))
+  url.searchParams.set('config', encodeString(config))
   history.replaceState(null, '', url.toString())
   navigator.clipboard.writeText(url.toString())
 }
@@ -23,4 +23,8 @@ export function retrieve(): ShareableData {
     inputCode: code ? ungzip(Base64.toUint8Array(code), { to: 'string' }) : '',
     config: config ? ungzip(Base64.toUint8Array(config), { to: 'string' }) : '',
   }
+}
+
+export function encodeString(str: string): string {
+  return Base64.fromUint8Array(gzip(str))
 }
