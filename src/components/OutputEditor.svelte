@@ -1,14 +1,22 @@
 <script lang="ts">
   import { onDestroy, onMount } from 'svelte'
   import { sharedOptions } from '../shared-monaco-options'
+  import type { MalvaConfig } from '../malva'
 
   export let value: string
   export let monaco: typeof import('monaco-editor')
+  export let config: MalvaConfig
   let el: HTMLDivElement
-  let editor: import('monaco-editor').editor.IStandaloneCodeEditor
+  let editor: import('monaco-editor').editor.IStandaloneCodeEditor | undefined
 
   $: {
     editor?.setValue(value)
+  }
+  $: {
+    editor?.updateOptions({
+      rulers: [config.printWidth ?? 80],
+      tabSize: config.indentWidth ?? 2,
+    })
   }
 
   onMount(() => {
@@ -22,7 +30,7 @@
   })
 
   onDestroy(() => {
-    editor.dispose()
+    editor?.dispose()
   })
 </script>
 

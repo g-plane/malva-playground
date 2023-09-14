@@ -1,13 +1,28 @@
 <script lang="ts">
   import { createEventDispatcher, onDestroy, onMount } from 'svelte'
   import { sharedOptions } from '../shared-monaco-options'
+  import type { MalvaConfig } from '../malva'
 
   export let value: string
   export let monaco: typeof import('monaco-editor')
+  export let config: MalvaConfig
   let el: HTMLDivElement
-  let editor: import('monaco-editor').editor.IStandaloneCodeEditor
+  let editor: import('monaco-editor').editor.IStandaloneCodeEditor | undefined
 
   const dispatch = createEventDispatcher()
+
+  $: {
+    if (editor) {
+      editor.updateOptions({
+        rulers: [config.printWidth ?? 80],
+        tabSize: config.indentWidth ?? 2,
+      })
+      editor.getModel()?.updateOptions({
+        indentSize: config.indentWidth ?? 2,
+        insertSpaces: !config.useTabs,
+      })
+    }
+  }
 
   onMount(() => {
     editor = monaco.editor.create(el, {
@@ -17,12 +32,12 @@
       language: 'css',
     })
     editor.onDidChangeModelContent(() => {
-      dispatch('input', editor.getValue())
+      dispatch('input', editor!.getValue())
     })
   })
 
   onDestroy(() => {
-    editor.dispose()
+    editor?.dispose()
   })
 </script>
 

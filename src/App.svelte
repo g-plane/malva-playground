@@ -5,7 +5,7 @@
   import ConfigEditor from './components/ConfigEditor.svelte'
   import { encodeString, retrieve, share } from './sharing'
   import { onMount } from 'svelte'
-  import { loadWasm, type Formatter } from './malva'
+  import { loadWasm, type Formatter, type MalvaConfig } from './malva'
 
   const monaco = import('monaco-editor')
   let format: Formatter = () => '/* Loading Malva... */'
@@ -15,6 +15,7 @@
 
   let inputCode = ''
   let configJSON = ''
+  let config: MalvaConfig = {}
   const syntax = 'css'
   let outputCode = ''
 
@@ -25,7 +26,15 @@
 
   $: {
     try {
-      outputCode = format(inputCode, syntax, JSON.parse(configJSON))
+      config = JSON.parse(configJSON)
+    } catch (error) {
+      outputCode = `/* ${error} */`
+    }
+  }
+
+  $: {
+    try {
+      outputCode = format(inputCode, syntax, config)
     } catch (error) {
       outputCode = `/* ${error} */`
     }
@@ -66,6 +75,7 @@
       <div class="h-70%">
         <InputEditor
           {monaco}
+          {config}
           value={inputCode}
           on:input={(event) => (inputCode = event.detail)}
         />
@@ -78,7 +88,7 @@
         />
       </div>
     </div>
-    <OutputEditor {monaco} value={outputCode} />
+    <OutputEditor {monaco} {config} value={outputCode} />
   </main>
 {/await}
 
