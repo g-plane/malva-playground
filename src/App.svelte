@@ -12,6 +12,7 @@
 
   const STORAGE_KEY_CODE = 'malva.v1.code'
   const STORAGE_KEY_CONFIG = 'malva.v1.config'
+  const STORAGE_KEY_SYNTAX = 'malva.v1.syntax'
 
   const shared = retrieve()
   let inputCode =
@@ -22,7 +23,8 @@
     shared.config ??
     localStorage.getItem(STORAGE_KEY_CONFIG) ??
     JSON.stringify({ printWidth: 80 }, null, 2)
-  const syntax = 'css'
+  let syntax =
+    shared.syntax ?? localStorage.getItem(STORAGE_KEY_SYNTAX) ?? 'css'
 
   let config: MalvaConfig = {}
   let outputCode = ''
@@ -30,6 +32,7 @@
   $: {
     localStorage.setItem(STORAGE_KEY_CODE, inputCode)
     localStorage.setItem(STORAGE_KEY_CONFIG, configJSON)
+    localStorage.setItem(STORAGE_KEY_SYNTAX, syntax)
   }
 
   $: {
@@ -53,7 +56,7 @@
   })
 
   function handleShare() {
-    share({ inputCode, config: configJSON })
+    share({ inputCode, config: configJSON, syntax })
   }
 
   function handleViewAST() {
