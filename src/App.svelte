@@ -13,10 +13,18 @@
   const STORAGE_KEY_CODE = 'malva.v1.code'
   const STORAGE_KEY_CONFIG = 'malva.v1.config'
 
-  let inputCode = ''
-  let configJSON = ''
-  let config: MalvaConfig = {}
+  const shared = retrieve()
+  let inputCode =
+    shared.inputCode ??
+    localStorage.getItem(STORAGE_KEY_CODE) ??
+    '.container>button{outline:none}'
+  let configJSON =
+    shared.config ??
+    localStorage.getItem(STORAGE_KEY_CONFIG) ??
+    JSON.stringify({ printWidth: 80 }, null, 2)
   const syntax = 'css'
+
+  let config: MalvaConfig = {}
   let outputCode = ''
 
   $: {
@@ -41,16 +49,6 @@
   }
 
   onMount(async () => {
-    const shared = retrieve()
-    inputCode =
-      shared.inputCode ||
-      localStorage.getItem(STORAGE_KEY_CODE) ||
-      '.container>button{outline:none}'
-    configJSON =
-      shared.config ||
-      localStorage.getItem(STORAGE_KEY_CONFIG) ||
-      JSON.stringify({ printWidth: 80 }, null, 2)
-
     format = await loadWasm('https://malva.netlify.app/wasm.js')
   })
 

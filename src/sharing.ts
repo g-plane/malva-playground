@@ -14,14 +14,18 @@ export function share({ inputCode, config }: ShareableData) {
   navigator.clipboard.writeText(url.toString())
 }
 
-export function retrieve(): ShareableData {
+export function retrieve(): Partial<ShareableData> {
   const searchParams = new URLSearchParams(location.search)
   const code = searchParams.get('code')
   const config = searchParams.get('config')
 
   return {
-    inputCode: code ? ungzip(Base64.toUint8Array(code), { to: 'string' }) : '',
-    config: config ? ungzip(Base64.toUint8Array(config), { to: 'string' }) : '',
+    inputCode: code
+      ? ungzip(Base64.toUint8Array(code), { to: 'string' })
+      : undefined,
+    config: config
+      ? ungzip(Base64.toUint8Array(config), { to: 'string' })
+      : undefined,
   }
 }
 
