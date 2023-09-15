@@ -5,7 +5,10 @@ import App from './App.svelte'
 self.MonacoEnvironment = {
   async getWorker(_, label) {
     switch (label) {
-      case 'css': {
+      case 'css':
+      case 'scss':
+      case 'sass':
+      case 'less': {
         const cssWorker = await import(
           'monaco-editor/esm/vs/language/css/css.worker?worker'
         )

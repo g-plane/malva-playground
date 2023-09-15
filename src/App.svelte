@@ -77,6 +77,7 @@
         <InputEditor
           {monaco}
           {config}
+          {syntax}
           value={inputCode}
           on:input={(event) => (inputCode = event.detail)}
         />
@@ -89,7 +90,7 @@
         />
       </div>
     </div>
-    <OutputEditor {monaco} {config} value={outputCode} />
+    <OutputEditor {monaco} {config} {syntax} value={outputCode} />
   </main>
 {/await}
 

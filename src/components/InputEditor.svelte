@@ -6,6 +6,7 @@
   export let value: string
   export let monaco: typeof import('monaco-editor')
   export let config: MalvaConfig
+  export let syntax: string
   let el: HTMLDivElement
   let editor: import('monaco-editor').editor.IStandaloneCodeEditor | undefined
 
@@ -17,10 +18,14 @@
         rulers: [config.printWidth ?? 80],
         tabSize: config.indentWidth ?? 2,
       })
-      editor.getModel()?.updateOptions({
-        indentSize: config.indentWidth ?? 2,
-        insertSpaces: !config.useTabs,
-      })
+      const model = editor.getModel()
+      if (model) {
+        model.updateOptions({
+          indentSize: config.indentWidth ?? 2,
+          insertSpaces: !config.useTabs,
+        })
+        monaco.editor.setModelLanguage(model, syntax)
+      }
     }
   }
 
