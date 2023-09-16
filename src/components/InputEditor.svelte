@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher, onDestroy, onMount } from 'svelte'
-  import { sharedOptions } from '../shared-monaco-options'
+  import { cssModeConfiguration, sharedOptions } from '../shared-monaco-options'
   import type { MalvaConfig } from '../malva'
 
   export let value: string
@@ -34,6 +34,10 @@
   }
 
   onMount(() => {
+    monaco.languages.css.cssDefaults.setModeConfiguration(cssModeConfiguration)
+    monaco.languages.css.scssDefaults.setModeConfiguration(cssModeConfiguration)
+    monaco.languages.css.lessDefaults.setModeConfiguration(cssModeConfiguration)
+
     editor = monaco.editor.create(el, {
       ...sharedOptions,
       renderWhitespace: 'boundary',
