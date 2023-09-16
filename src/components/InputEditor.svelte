@@ -29,6 +29,10 @@
     }
   }
 
+  function handleResize() {
+    editor?.layout()
+  }
+
   onMount(() => {
     editor = monaco.editor.create(el, {
       ...sharedOptions,
@@ -39,9 +43,12 @@
     editor.onDidChangeModelContent(() => {
       dispatch('input', editor!.getValue())
     })
+
+    window.addEventListener('resize', handleResize)
   })
 
   onDestroy(() => {
+    window.removeEventListener('resize', handleResize)
     editor?.dispose()
   })
 </script>

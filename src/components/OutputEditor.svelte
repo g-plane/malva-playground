@@ -30,6 +30,10 @@
     }
   }
 
+  function handleResize() {
+    editor?.layout()
+  }
+
   onMount(() => {
     editor = monaco.editor.create(el, {
       ...sharedOptions,
@@ -38,9 +42,12 @@
       language: 'css',
       readOnly: true,
     })
+
+    window.addEventListener('resize', handleResize)
   })
 
   onDestroy(() => {
+    window.removeEventListener('resize', handleResize)
     editor?.dispose()
   })
 </script>
