@@ -70,6 +70,10 @@ export const configSchema: JSONSchema6 = {
       type: 'boolean',
       default: false,
     },
+    padComments: {
+      type: 'boolean',
+      default: false,
+    },
   },
   additionalProperties: false,
 }
