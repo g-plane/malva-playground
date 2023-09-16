@@ -3,6 +3,7 @@
   import InputEditor from './components/InputEditor.svelte'
   import OutputEditor from './components/OutputEditor.svelte'
   import ConfigEditor from './components/ConfigEditor.svelte'
+  import OptionsDialog from './components/OptionsDialog.svelte'
   import { encodeString, retrieve, share } from './sharing'
   import { onMount } from 'svelte'
   import { loadWasm, type Formatter, type MalvaConfig } from './malva'
@@ -65,9 +66,15 @@
     url.searchParams.set('syntax', syntax)
     window.open(url, '_blank', 'noopener noreferrer')
   }
+
+  let showOptions = false
 </script>
 
-<Header on:share={handleShare} on:view-ast={handleViewAST} />
+<Header
+  on:show-options={() => (showOptions = true)}
+  on:share={handleShare}
+  on:view-ast={handleViewAST}
+/>
 {#await monaco}
   <main class="flex justify-center items-center">Loading editor...</main>
 {:then monaco}
@@ -93,9 +100,32 @@
     <OutputEditor {monaco} {config} {syntax} value={outputCode} />
   </main>
 {/await}
+{#if showOptions}
+  <div
+    class="overlay"
+    aria-hidden="true"
+    on:click={() => (showOptions = false)}
+  />
+  <OptionsDialog
+    {syntax}
+    on:update:syntax={(event) => (syntax = event.detail)}
+    on:close={() => (showOptions = false)}
+  />
+{/if}
 
 <style>
   main {
     min-height: calc(100vh - 57px);
+  }
+
+  .overlay {
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: hsla(0, 0%, 0%, 0.5);
+    backdrop-filter: blur(2px);
   }
 </style>
