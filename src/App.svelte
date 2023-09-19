@@ -53,7 +53,7 @@
   }
 
   onMount(async () => {
-    format = await loadWasm('https://malva.netlify.app/wasm.js')
+    format = await loadWasm('https://malva.netlify.app/playground_wasm.js')
   })
 
   function handleShare() {
