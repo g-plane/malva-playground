@@ -74,6 +74,10 @@ export const configSchema: JSONSchema6 = {
       type: 'boolean',
       default: false,
     },
+    declarationNameLinebreak: {
+      type: 'boolean',
+      default: false,
+    },
   },
   additionalProperties: false,
 }
