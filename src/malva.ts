@@ -62,7 +62,7 @@ export const configSchema: JSONSchema6 = {
       enum: ['always', 'consistent', 'wrap'],
       default: 'consistent',
     },
-    omitZeroBeforeDot: {
+    omitNumberLeadingZero: {
       type: 'boolean',
       default: false,
     },
