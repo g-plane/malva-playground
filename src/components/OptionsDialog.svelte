@@ -32,7 +32,7 @@
       <option value="css">CSS</option>
       <option value="scss">SCSS</option>
       <option value="sass">Sass</option>
-      <option value="less" disabled>Less</option>
+      <option value="less">Less</option>
     </select>
   </p>
 
