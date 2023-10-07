@@ -74,7 +74,7 @@ export const configSchema: JSONSchema6 = {
       type: 'boolean',
       default: false,
     },
-    declarationNameLinebreak: {
+    linebreakInPseudoParens: {
       type: 'boolean',
       default: false,
     },
