@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onDestroy, onMount } from 'svelte'
-  import { sharedOptions } from '../shared-monaco-options'
   import type { MalvaConfig } from '../malva'
+  import { sharedOptions } from '../shared-monaco-options'
 
   export let value: string
   export let monaco: typeof import('monaco-editor')
@@ -52,4 +52,4 @@
   })
 </script>
 
-<div class="h-full border-l-width-1px" bind:this={el} />
+<div class="h-full border-l-width-1px" bind:this={el}></div>

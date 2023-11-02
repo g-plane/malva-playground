@@ -15,20 +15,20 @@
           class="btn-options border-fuchsia-600 border-width-1px rounded-sm px-2 py-1 hover:bg-fuchsia-100 active:bg-fuchsia-200 focus:bg-fuchsia-200 relative"
           on:click={() => dispatch('show-options')}
         >
-          <i class="fa-solid fa-gear mr-1" />Options
+          <i class="fa-solid fa-gear mr-1"></i>Options
         </button>
       </div>
       <button
         class="btn-options border-fuchsia-600 border-width-1px rounded-sm px-2 py-1 hover:bg-fuchsia-100 active:bg-fuchsia-200 focus:bg-fuchsia-200 relative"
         on:click={() => dispatch('share')}
       >
-        <i class="fa-solid fa-share mr-1" />Share
+        <i class="fa-solid fa-share mr-1"></i>Share
       </button>
       <button
         class="btn-options border-fuchsia-600 border-width-1px rounded-sm px-2 py-1 hover:bg-fuchsia-100 active:bg-fuchsia-200 focus:bg-fuchsia-200 relative"
         on:click={() => dispatch('view-ast')}
       >
-        <i class="fa-solid fa-bug mr-1" />View AST
+        <i class="fa-solid fa-bug mr-1"></i>View AST
       </button>
     </div>
 
@@ -39,7 +39,7 @@
         rel="noopener noreferrer"
         class="mr-4"
       >
-        <i class="fa-solid fa-arrow-up-right-from-square mr-1" />
+        <i class="fa-solid fa-arrow-up-right-from-square mr-1"></i>
         Malva Repo
       </a>
       <a
@@ -47,7 +47,7 @@
         target="_blank"
         rel="noopener noreferrer"
       >
-        <i class="fa-solid fa-arrow-up-right-from-square mr-1" />
+        <i class="fa-solid fa-arrow-up-right-from-square mr-1"></i>
         Playground Repo
       </a>
     </div>

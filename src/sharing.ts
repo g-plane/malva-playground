@@ -2,9 +2,9 @@ import { Base64 } from 'js-base64'
 import { gzip, ungzip } from 'pako'
 
 export type ShareableData = {
-  inputCode: string
-  config: string
-  syntax: string
+  inputCode: string,
+  config: string,
+  syntax: string,
 }
 
 export function share({ inputCode, config, syntax }: ShareableData) {

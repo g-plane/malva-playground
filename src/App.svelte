@@ -1,12 +1,12 @@
 <script lang="ts">
+  import { onMount } from 'svelte'
+  import ConfigEditor from './components/ConfigEditor.svelte'
   import Header from './components/Header.svelte'
   import InputEditor from './components/InputEditor.svelte'
-  import OutputEditor from './components/OutputEditor.svelte'
-  import ConfigEditor from './components/ConfigEditor.svelte'
   import OptionsDialog from './components/OptionsDialog.svelte'
+  import OutputEditor from './components/OutputEditor.svelte'
+  import { type Formatter, type MalvaConfig, loadWasm } from './malva'
   import { encodeString, retrieve, share } from './sharing'
-  import { onMount } from 'svelte'
-  import { loadWasm, type Formatter, type MalvaConfig } from './malva'
 
   const monaco = import('monaco-editor')
   let format: Formatter = () => '/* Loading Malva... */'
@@ -16,16 +16,14 @@
   const STORAGE_KEY_SYNTAX = 'malva.v1.syntax'
 
   const shared = retrieve()
-  let inputCode =
-    shared.inputCode ??
+  let inputCode = shared.inputCode ??
     localStorage.getItem(STORAGE_KEY_CODE) ??
     '.container>button{outline:none}'
-  let configJSON =
-    shared.config ??
+  let configJSON = shared.config ??
     localStorage.getItem(STORAGE_KEY_CONFIG) ??
     JSON.stringify({ printWidth: 80 }, null, 2)
-  let syntax =
-    shared.syntax ?? localStorage.getItem(STORAGE_KEY_SYNTAX) ?? 'css'
+  let syntax = shared.syntax ?? localStorage.getItem(STORAGE_KEY_SYNTAX) ??
+    'css'
 
   let config: MalvaConfig = {}
   let outputCode = ''
@@ -105,7 +103,8 @@
     class="overlay"
     aria-hidden="true"
     on:click={() => (showOptions = false)}
-  />
+  >
+  </div>
   <OptionsDialog
     {syntax}
     on:update:syntax={(event) => (syntax = event.detail)}
