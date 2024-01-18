@@ -20,15 +20,10 @@
   }
 </script>
 
-<dialog
-  class="border-fuchsia-600 border-width-1px rounded-sm p-3 w-80 text-base text-stone-900"
->
+<dialog class="border-fuchsia-600 border-width-1px rounded-sm p-3 w-80 text-base text-stone-900">
   <p class="flex justify-between">
     <span>Syntax</span>
-    <select
-      value={form.syntax}
-      on:input={(event) => (form.syntax = event.currentTarget.value)}
-    >
+    <select value={form.syntax} on:input={(event) => (form.syntax = event.currentTarget.value)}>
       <option value="css">CSS</option>
       <option value="scss">SCSS</option>
       <option value="sass">Sass</option>

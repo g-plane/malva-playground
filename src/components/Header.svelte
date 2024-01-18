@@ -4,9 +4,7 @@
   const dispatch = createEventDispatcher()
 </script>
 
-<header
-  class="h-14 p-3 grid grid-cols-2 bg-fuchsia-50 border-b-width-2px border-b-fuchsia-200"
->
+<header class="h-14 p-3 grid grid-cols-2 bg-fuchsia-50 border-b-width-2px border-b-fuchsia-200">
   <div class="text-lg font-semibold text-stone-900">Malva Playground</div>
   <div class="flex justify-between items-center px-4 text-sm text-fuchsia-800">
     <div class="flex gap-x-3">

@@ -99,12 +99,7 @@
   </main>
 {/await}
 {#if showOptions}
-  <div
-    class="overlay"
-    aria-hidden="true"
-    on:click={() => (showOptions = false)}
-  >
-  </div>
+  <div class="overlay" aria-hidden="true" on:click={() => (showOptions = false)}></div>
   <OptionsDialog
     {syntax}
     on:update:syntax={(event) => (syntax = event.detail)}

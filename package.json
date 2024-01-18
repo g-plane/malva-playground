@@ -9,6 +9,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "fmt": "dprint fmt",
+    "fmt:check": "dprint check",
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "dependencies": {
@@ -22,7 +24,7 @@
     "@sveltejs/vite-plugin-svelte": "^2.4.5",
     "@types/json-schema": "^7.0.12",
     "@types/pako": "^2.0.0",
-    "dprint": "^0.42.5",
+    "dprint": "^0.45.0",
     "svelte": "^4.2.0",
     "svelte-check": "^3.5.1",
     "tslib": "^2.6.2",
