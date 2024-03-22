@@ -78,6 +78,11 @@ export const configSchema: JSONSchema6 = {
       type: 'boolean',
       default: false,
     },
+    declarationOrder: {
+      type: ['string', 'null'],
+      enum: ['alphabetical', 'smacss', 'concentric'],
+      default: null,
+    },
   },
   additionalProperties: false,
 }
