@@ -1,6 +1,6 @@
 # Malva Playground
 
-Playground for try [Malva](https://github.com/g-plane/malva) online.
+Playground for trying [Malva](https://github.com/g-plane/malva) online.
 
 [Try it now.](http://raffia-play.vercel.app/)
 
