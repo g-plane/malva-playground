@@ -83,6 +83,11 @@ export const configSchema: JSONSchema6 = {
       enum: ['alphabetical', 'smacss', 'concentric'],
       default: null,
     },
+    singleLineBlockThreshold: {
+      type: ['integer', 'null'],
+      default: null,
+      minimum: 0,
+    },
   },
   additionalProperties: false,
 }
