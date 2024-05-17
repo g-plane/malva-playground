@@ -53,3 +53,10 @@
 </script>
 
 <div class="h-full border-l-width-1px" bind:this={el}></div>
+
+<style>
+  div {
+    height: 100%;
+    border-left-width: 1px;
+  }
+</style>

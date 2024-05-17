@@ -20,8 +20,8 @@
   }
 </script>
 
-<dialog class="border-fuchsia-600 border-width-1px rounded-sm p-3 w-80 text-base text-stone-900">
-  <p class="flex justify-between">
+<dialog>
+  <p class="syntax-select">
     <span>Syntax</span>
     <select value={form.syntax} on:input={(event) => (form.syntax = event.currentTarget.value)}>
       <option value="css">CSS</option>
@@ -31,17 +31,11 @@
     </select>
   </p>
 
-  <div class="flex justify-end gap-x-2 mt-8">
-    <button
-      class="border-fuchsia-600 border-width-1px rounded-sm w-30 px-2 py-1 text-sm text-fuchsia-800 hover:bg-fuchsia-100 active:bg-fuchsia-200 focus:bg-fuchsia-200"
-      on:click={handleConfirm}
-    >
+  <div class="buttons">
+    <button on:click={handleConfirm}>
       Done
     </button>
-    <button
-      class="border-fuchsia-600 border-width-1px rounded-sm w-30 px-2 py-1 text-sm text-fuchsia-800 hover:bg-fuchsia-100 active:bg-fuchsia-200 focus:bg-fuchsia-200"
-      on:click={handleCancel}
-    >
+    <button on:click={handleCancel}>
       Cancel
     </button>
   </div>
@@ -56,5 +50,39 @@
     display: grid;
     grid-template-columns: 1fr;
     row-gap: 8px;
+    border: 1px solid #c026d3;
+    border-radius: 2px;
+    padding: 12px;
+    width: 320px;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: #1c1917;
+  }
+
+  .syntax-select {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: end;
+    column-gap: 8px;
+    margin-top: 32px;
+  }
+  button {
+    border: 1px solid #c026d3;
+    border-radius: 2px;
+    width: 120px;
+    padding: 4px 8px;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: #86198f;
+    &:hover {
+      background: #fae8ff;
+    }
+    &:active, &:focus {
+      background: #f5d0fe;
+    }
   }
 </style>

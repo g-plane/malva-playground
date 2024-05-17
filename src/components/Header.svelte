@@ -4,40 +4,31 @@
   const dispatch = createEventDispatcher()
 </script>
 
-<header class="h-14 p-3 grid grid-cols-2 bg-fuchsia-50 border-b-width-2px border-b-fuchsia-200">
-  <div class="text-lg font-semibold text-stone-900">Malva Playground</div>
-  <div class="flex justify-between items-center px-4 text-sm text-fuchsia-800">
-    <div class="flex gap-x-3">
+<header>
+  <div class="title">Malva Playground</div>
+  <div class="right">
+    <div class="buttons">
       <div>
-        <button
-          class="btn-options border-fuchsia-600 border-width-1px rounded-sm px-2 py-1 hover:bg-fuchsia-100 active:bg-fuchsia-200 focus:bg-fuchsia-200 relative"
-          on:click={() => dispatch('show-options')}
-        >
-          <i class="fa-solid fa-gear mr-1"></i>Options
+        <button class="btn-options" on:click={() => dispatch('show-options')}>
+          <i class="fa-solid fa-gear"></i>Options
         </button>
       </div>
-      <button
-        class="btn-options border-fuchsia-600 border-width-1px rounded-sm px-2 py-1 hover:bg-fuchsia-100 active:bg-fuchsia-200 focus:bg-fuchsia-200 relative"
-        on:click={() => dispatch('share')}
-      >
-        <i class="fa-solid fa-share mr-1"></i>Share
+      <button class="btn-options" on:click={() => dispatch('share')}>
+        <i class="fa-solid fa-share"></i>Share
       </button>
-      <button
-        class="btn-options border-fuchsia-600 border-width-1px rounded-sm px-2 py-1 hover:bg-fuchsia-100 active:bg-fuchsia-200 focus:bg-fuchsia-200 relative"
-        on:click={() => dispatch('view-ast')}
-      >
-        <i class="fa-solid fa-bug mr-1"></i>View AST
+      <button class="btn-options" on:click={() => dispatch('view-ast')}>
+        <i class="fa-solid fa-bug"></i>View AST
       </button>
     </div>
 
-    <div class="flex items-center underline">
+    <div class="links">
       <a
         href="https://github.com/g-plane/malva"
         target="_blank"
         rel="noopener noreferrer"
         class="mr-4"
       >
-        <i class="fa-solid fa-arrow-up-right-from-square mr-1"></i>
+        <i class="fa-solid fa-arrow-up-right-from-square"></i>
         Malva Repo
       </a>
       <a
@@ -45,9 +36,66 @@
         target="_blank"
         rel="noopener noreferrer"
       >
-        <i class="fa-solid fa-arrow-up-right-from-square mr-1"></i>
+        <i class="fa-solid fa-arrow-up-right-from-square"></i>
         Playground Repo
       </a>
     </div>
   </div>
 </header>
+
+<style>
+  header {
+    height: 56px;
+    padding: 12px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    background: #fdf4ff;
+    border-bottom: 2px solid #f5d0fe;
+  }
+
+  .title {
+    font-size: 1.12rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+    color: #1c1917;
+  }
+
+  .right {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: #86198f;
+  }
+
+  .buttons {
+    display: flex;
+    column-gap: 12px;
+  }
+  .btn-options {
+    border: 1px solid #c026d3;
+    border-radius: 2px;
+    padding: 4px 8px;
+    position: relative;
+    &:hover {
+      background: #fae8ff;
+    }
+    &:active, &:focus {
+      background: #f5d0fe;
+    }
+  }
+
+  .links {
+    display: flex;
+    align-items: center;
+    text-decoration: underline;
+  }
+  a:not(:last-of-type) {
+    margin-right: 16px;
+  }
+  i {
+    margin-right: 4px;
+  }
+</style>

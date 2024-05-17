@@ -74,11 +74,11 @@
   on:view-ast={handleViewAST}
 />
 {#await monaco}
-  <main class="flex justify-center items-center">Loading editor...</main>
+  <main class="loading">Loading editor...</main>
 {:then monaco}
-  <main class="grid grid-cols-2 h-full">
-    <div>
-      <div class="h-70%">
+  <main>
+    <div class="left">
+      <div>
         <InputEditor
           {monaco}
           {config}
@@ -87,7 +87,7 @@
           on:input={(event) => (inputCode = event.detail)}
         />
       </div>
-      <div class="h-30%">
+      <div>
         <ConfigEditor
           {monaco}
           value={configJSON}
@@ -110,6 +110,23 @@
 <style>
   main {
     min-height: calc(100vh - 57px);
+    &.loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    &:not(.loading) {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      height: 100%;
+    }
+  }
+
+  .left > :nth-of-type(1) {
+    height: 70%;
+  }
+  .left > :nth-of-type(2) {
+    height: 30%;
   }
 
   .overlay {

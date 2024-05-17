@@ -42,4 +42,10 @@
   })
 </script>
 
-<div class="h-full" bind:this={el}></div>
+<div bind:this={el}></div>
+
+<style>
+  div {
+    height: 100%;
+  }
+</style>

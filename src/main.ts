@@ -1,5 +1,4 @@
 import '@unocss/reset/tailwind.css'
-import 'virtual:uno.css'
 import App from './App.svelte'
 
 self.MonacoEnvironment = {

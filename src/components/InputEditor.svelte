@@ -57,4 +57,11 @@
   })
 </script>
 
-<div class="h-full border-0 border-b-width-1px" bind:this={el}></div>
+<div bind:this={el}></div>
+
+<style>
+  div {
+    height: 100%;
+    border-bottom-width: 1px;
+  }
+</style>
