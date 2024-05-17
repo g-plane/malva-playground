@@ -22,7 +22,6 @@
   "devDependencies": {
     "@gplane/tsconfig": "^6.1.0",
     "@sveltejs/vite-plugin-svelte": "^3.0.2",
-    "@types/json-schema": "^7.0.15",
     "@types/pako": "^2.0.3",
     "dprint": "^0.45.0",
     "svelte": "^4.2.12",

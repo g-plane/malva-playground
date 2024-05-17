@@ -1,6 +1,5 @@
 <script lang="ts">
   import { createEventDispatcher, onDestroy, onMount } from 'svelte'
-  import { configSchema } from '../malva'
   import { sharedOptions } from '../shared-monaco-options'
 
   export let value: string
@@ -14,7 +13,7 @@
     editor?.layout()
   }
 
-  onMount(() => {
+  onMount(async () => {
     editor = monaco.editor.create(el, {
       ...sharedOptions,
       value,
@@ -25,11 +24,11 @@
     })
 
     monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
+      enableSchemaRequest: true,
       schemas: [
         {
-          uri: 'http://server/malva-schema.json',
+          uri: 'https://malva.netlify.app/schema.json',
           fileMatch: [editor.getModel()?.uri.toString() ?? ''],
-          schema: configSchema,
         },
       ],
     })
