@@ -14,20 +14,20 @@
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "dependencies": {
-    "@unocss/reset": "^0.60.2",
+    "@unocss/reset": "^0.64.0",
     "js-base64": "^3.7.7",
-    "monaco-editor": "^0.48.0",
+    "monaco-editor": "^0.52.0",
     "pako": "^2.1.0"
   },
   "devDependencies": {
-    "@gplane/tsconfig": "^6.1.0",
-    "@sveltejs/vite-plugin-svelte": "^3.1.0",
+    "@gplane/tsconfig": "^6.2.0",
+    "@sveltejs/vite-plugin-svelte": "^4.0.0",
     "@types/pako": "^2.0.3",
-    "dprint": "^0.45.1",
-    "svelte": "^4.2.17",
-    "svelte-check": "^3.7.1",
-    "tslib": "^2.6.2",
-    "typescript": "^5.4.5",
-    "vite": "^5.2.11"
+    "dprint": "^0.47.5",
+    "svelte": "^5.1.11",
+    "svelte-check": "^4.0.5",
+    "tslib": "^2.8.1",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.10"
   }
 }

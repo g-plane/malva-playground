@@ -1,29 +1,27 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte'
+  let { syntax, onUpdateSyntax, onClose }: {
+    syntax: string,
+    onUpdateSyntax: (syntax: string) => void,
+    onClose: () => void,
+  } = $props()
 
-  export let syntax: string
-
-  let form = {
-    syntax,
-  }
-
-  const dispatch = createEventDispatcher()
+  let form = $state({ syntax })
 
   function handleConfirm() {
-    dispatch('update:syntax', form.syntax)
-    dispatch('close')
+    onUpdateSyntax(form.syntax)
+    onClose()
   }
 
   function handleCancel() {
     form.syntax = syntax
-    dispatch('close')
+    onClose()
   }
 </script>
 
 <dialog>
   <p class="syntax-select">
     <span>Syntax</span>
-    <select value={form.syntax} on:input={(event) => (form.syntax = event.currentTarget.value)}>
+    <select value={form.syntax} oninput={(event) => (form.syntax = event.currentTarget.value)}>
       <option value="css">CSS</option>
       <option value="scss">SCSS</option>
       <option value="sass">Sass</option>
@@ -32,10 +30,10 @@
   </p>
 
   <div class="buttons">
-    <button on:click={handleConfirm}>
+    <button onclick={handleConfirm}>
       Done
     </button>
-    <button on:click={handleCancel}>
+    <button onclick={handleCancel}>
       Cancel
     </button>
   </div>

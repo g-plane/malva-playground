@@ -3,17 +3,19 @@
   import type { MalvaConfig } from '../malva'
   import { sharedOptions } from '../shared-monaco-options'
 
-  export let value: string
-  export let monaco: typeof import('monaco-editor')
-  export let config: MalvaConfig
-  export let syntax: string
+  let { value, monaco, config, syntax }: {
+    value: string,
+    monaco: typeof import('monaco-editor'),
+    config: MalvaConfig,
+    syntax: string,
+  } = $props()
   let el: HTMLDivElement
-  let editor: import('monaco-editor').editor.IStandaloneCodeEditor | undefined
+  let editor: import('monaco-editor').editor.IStandaloneCodeEditor | undefined = $state()
 
-  $: {
+  $effect(() => {
     editor?.setValue(value)
-  }
-  $: {
+  })
+  $effect(() => {
     if (editor) {
       editor.updateOptions({
         rulers: [config.printWidth ?? 80],
@@ -28,7 +30,7 @@
         monaco.editor.setModelLanguage(model, syntax)
       }
     }
-  }
+  })
 
   function handleResize() {
     editor?.layout()

@@ -1,4 +1,5 @@
 import '@unocss/reset/tailwind.css'
+import { mount } from 'svelte'
 import App from './App.svelte'
 
 self.MonacoEnvironment = {
@@ -30,7 +31,7 @@ self.MonacoEnvironment = {
   },
 }
 
-const app = new App({
+const app = mount(App, {
   target: document.querySelector('#app')!,
 })
 

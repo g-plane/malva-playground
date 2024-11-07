@@ -1,13 +1,14 @@
 <script lang="ts">
-  import { createEventDispatcher, onDestroy, onMount } from 'svelte'
+  import { onDestroy, onMount } from 'svelte'
   import { sharedOptions } from '../shared-monaco-options'
 
-  export let value: string
-  export let monaco: typeof import('monaco-editor')
+  let { value, monaco, onInput }: {
+    value: string,
+    monaco: typeof import('monaco-editor'),
+    onInput: (value: string) => void,
+  } = $props()
   let el: HTMLDivElement
-  let editor: import('monaco-editor').editor.IStandaloneCodeEditor
-
-  const dispatch = createEventDispatcher()
+  let editor: import('monaco-editor').editor.IStandaloneCodeEditor | undefined = $state()
 
   function handleResize() {
     editor?.layout()
@@ -20,7 +21,9 @@
       language: 'json',
     })
     editor.onDidChangeModelContent(() => {
-      dispatch('input', editor.getValue())
+      if (editor) {
+        onInput(editor.getValue())
+      }
     })
 
     monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
@@ -38,7 +41,7 @@
 
   onDestroy(() => {
     window.removeEventListener('resize', handleResize)
-    editor.dispose()
+    editor?.dispose()
   })
 </script>
 

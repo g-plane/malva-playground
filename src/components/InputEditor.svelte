@@ -1,18 +1,19 @@
 <script lang="ts">
-  import { createEventDispatcher, onDestroy, onMount } from 'svelte'
+  import { onDestroy, onMount } from 'svelte'
   import type { MalvaConfig } from '../malva'
   import { cssModeConfiguration, sharedOptions } from '../shared-monaco-options'
 
-  export let value: string
-  export let monaco: typeof import('monaco-editor')
-  export let config: MalvaConfig
-  export let syntax: string
+  let { value, monaco, config, syntax, onInput }: {
+    value: string,
+    monaco: typeof import('monaco-editor'),
+    config: MalvaConfig,
+    syntax: string,
+    onInput: (value: string) => void,
+  } = $props()
   let el: HTMLDivElement
-  let editor: import('monaco-editor').editor.IStandaloneCodeEditor | undefined
+  let editor: import('monaco-editor').editor.IStandaloneCodeEditor | undefined = $state()
 
-  const dispatch = createEventDispatcher()
-
-  $: {
+  $effect(() => {
     if (editor) {
       editor.updateOptions({
         rulers: [config.printWidth ?? 80],
@@ -27,7 +28,7 @@
         monaco.editor.setModelLanguage(model, syntax)
       }
     }
-  }
+  })
 
   function handleResize() {
     editor?.layout()
@@ -45,7 +46,9 @@
       language: 'css',
     })
     editor.onDidChangeModelContent(() => {
-      dispatch('input', editor!.getValue())
+      if (editor) {
+        onInput(editor.getValue())
+      }
     })
 
     window.addEventListener('resize', handleResize)

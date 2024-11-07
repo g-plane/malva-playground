@@ -1,7 +1,9 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte'
-
-  const dispatch = createEventDispatcher()
+  let { onShowOptions, onShare, onViewAST }: {
+    onShowOptions: () => void,
+    onShare: () => void,
+    onViewAST: () => void,
+  } = $props()
 </script>
 
 <header>
@@ -9,14 +11,14 @@
   <div class="right">
     <div class="buttons">
       <div>
-        <button class="btn-options" on:click={() => dispatch('show-options')}>
+        <button class="btn-options" onclick={onShowOptions}>
           <i class="fa-solid fa-gear"></i>Options
         </button>
       </div>
-      <button class="btn-options" on:click={() => dispatch('share')}>
+      <button class="btn-options" onclick={onShare}>
         <i class="fa-solid fa-share"></i>Share
       </button>
-      <button class="btn-options" on:click={() => dispatch('view-ast')}>
+      <button class="btn-options" onclick={onViewAST}>
         <i class="fa-solid fa-bug"></i>View AST
       </button>
     </div>
